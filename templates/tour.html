@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>สถานที่ท่องเที่ยวแนะนำ</title>
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, #e8f0ff, #ffffff);
+            color: #333;
+        }
+
+        header {
+            background: #2b6cb0;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 40px auto;
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        /* Sidebar เมนูด้านซ้าย */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            background: #2b6cb0;
+            padding: 10px 15px;
+            border-radius: 10px;
+            transition: 0.3s;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .sidebar a:hover {
+            background: #1d4d8c;
+        }
+
+        /* พื้นที่รูปภาพ */
+        .content {
+            flex: 1;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .content img {
+            width: 100%;
+            max-width: 700px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        .content p {
+            margin-top: 15px;
+            font-size: 1.1em;
+            color: #444;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            padding-bottom: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .sidebar {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>สถานที่ท่องเที่ยว: ปิล็อก-บ้านอีต่อง</h1>
+    </header>
+
+    <div class="container">
+        <!-- Tab เมนูด้านซ้าย -->
+        <div class="sidebar">
+            <a href="{{ url_for('tour') }}">✈️ สถานที่ท่องเที่ยว</a>
+            <a href="{{ url_for('tech') }}">💻 เทคโนโลยีที่สนใจ</a>
+            <a href="{{ url_for('myid') }}">🪪 รหัสนักศึกษา</a>
+            <a href="{{ url_for('draw', rounds=3) }}">▶️ Draw a Pattern</a>
+        </div>
+
+        <!-- Tab เนื้อหา -->
+        <div class="content">
+            <center><img src="static/images/Pilok1.jpg" width="500" height="600" /><img></center>
+            <p>
+                ปิล็อกเป็นตำบลหนึ่งในอำเภอทองผาภูมิ จังหวัดกาญจนบุรี
+                เป็นแหล่งท่องเที่ยวธรรมชาติและวัฒนธรรมที่มีเสน่ห์เฉพาะตัว
+                โดยเฉพาะหมู่บ้านอีต่อง (บ้านอีต่อง) ซึ่งเป็นหมู่บ้านเก่าแก่ที่เคยรุ่งเรืองจากกิจการเหมืองแร่ดีบุก
+                ปัจจุบันกลายเป็นจุดหมายของนักเดินทางที่ต้องการสัมผัสบรรยากาศเขา หมอก และวิถีชีวิตชุมชน
+
+
+            <center><img src="static/images/Pilok2.jpg" width="500" height="600" /><img></center>
+
+                🌄 จุดเด่นของ “ปิล็อก” ธรรมชาติสวยงามและอากาศเย็นตลอดปี บ้านอีต่องอยู่บนภูเขาสูงติดชายแดนไทย–เมียนมา
+                    มีหมอกในตอนเช้าเกือบตลอดปี โดยเฉพาะช่วงปลายฝนต้นหนาว บรรยากาศสงบ เหมาะกับการพักผ่อนและสัมผัสธรรมชาติ
+
+            <center><img src="static/images/Pilok3.jpg" width="500" height="600" /><img></center>
+            <center><img src="static/images/Pilok4.jpg" width="500" height="600" /><img></center>
+            </p>
+        </div>
+    </div>
+    <footer>
+        © 2025 CT526 | Project Python Web By Flask
+    </footer>
+</body>
+</html>

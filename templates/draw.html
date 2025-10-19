@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Draw a Pattern</title>
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, #e8f0ff, #ffffff);
+            color: #333;
+        }
+
+        header {
+            background: #2b6cb0;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 40px auto;
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        /* Sidebar เมนูด้านซ้าย */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            background: #2b6cb0;
+            padding: 10px 15px;
+            border-radius: 10px;
+            transition: 0.3s;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .sidebar a:hover {
+            background: #1d4d8c;
+        }
+
+        /* พื้นที่เนื้อหา Draw */
+        .content {
+            flex: 1;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-weight: 600;
+        }
+
+        input[type="number"], input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            width: 120px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        button {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-draw {
+            background-color: #2b6cb0;
+        }
+
+        .btn-reset {
+            background-color: #e63946;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        pre {
+            background-color: #0d1117;
+            color: #00ff8c;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-size: 1rem;
+            text-align: left;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            padding-bottom: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .sidebar {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>▶️ Draw a Pattern</h1>
+    </header>
+
+    <div class="container">
+        <!-- Tab เมนูด้านซ้าย  -->
+        <div class="sidebar">
+            <a href="{{ url_for('tour') }}">✈️ สถานที่ท่องเที่ยว</a>
+            <a href="{{ url_for('tech') }}">💻 เทคโนโลยีที่สนใจ</a>
+            <a href="{{ url_for('myid') }}">🪪 รหัสนักศึกษา</a>
+            <a href="{{ url_for('draw', rows=3) }}">▶️ Draw a Pattern</a>
+        </div>
+
+        <!-- Tab เนื้อหา -->
+        <div class="content">
+            <form method="POST">    <!-- ฟอร์มกรอกข้อมูล -->
+                <label>กรุณาใส่จำนวนแถว:</label>
+                <input type="number" name="rounds" placeholder="เช่น 3 แถว" required>  <!--  กรอกจำนวนแถว -->
+                <label>กรุณาใส่ตัวอักษร:</label>
+                <input type="text" name="character" maxlength="1" placeholder="x" value="x" required>     <!--  กรอกตัวตัวอักษร -->
+                <button type="submit" class="btn-draw">Draw!</button>
+                <button type="button" class="btn-reset" onclick="window.location.href='{{ url_for('draw') }}'">Reset</button>
+            </form>
+
+            {% if result %}
+                <h3>ผลลัพธ์สำหรับ {{ rounds }} แถว ด้วยตัวอักษร '{{ character }}'</h3>  
+                <pre>
+{% for line in result %}  <!-- วนลูปแต่ละบรรทัดของผลลัพธ์ที่ Flask ส่งมา แล้วแสดงออกมาเรียงกัน -->
+{{ line }}
+{% endfor %}
+                </pre>
+            {% endif %}
+        </div>
+    </div>
+
+    <footer>© 2025 CT526 | Project Python Web By Flask</footer>
+</body>
+</html>
